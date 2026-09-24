@@ -1,0 +1,536 @@
+<?php
+
+if (isset($erro)) {
+    echo "<div>" . htmlspecialchars($erro) . "</div>";
+    exit;
+}
+
+if (!isset($doador)) {
+    echo "<div>Doador não encontrado!</div>";
+    exit;
+}
+
+if (!isset($tiposSangue)) {
+    $tiposSangue = [];
+}
+
+?>
+
+<form action="index.php?rota=atualizar-doador" method="POST">
+
+    <input
+        type="hidden"
+        name="id"
+        value="<?= (int) $doador['id'] ?>"
+    >
+
+    <div class="container">
+
+        <h1 id="path2">Editar Cadastro</h1>
+
+        <div class="contentform">
+
+            <div class="form-container">
+
+                <div class="row">
+
+                    <div class="column">
+
+                        <label for="nome">
+                            Nome<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="nome"
+                            id="nome"
+                            value="<?= htmlspecialchars($doador['nome']) ?>"
+                            placeholder="Digite o nome"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="column">
+
+                        <label for="cpf">
+                            CPF<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="cpf"
+                            id="cpf"
+                            value="<?= htmlspecialchars($doador['cpf']) ?>"
+                            placeholder="Digite o CPF"
+                            required
+                            readonly
+                        >
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="sexo">
+                            Sexo<span class="required">*</span>
+                        </label>
+
+                        <select
+                            name="sexo"
+                            id="sexo"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                disabled
+                                <?= $doador['sexo'] == '' ? 'selected' : '' ?>
+                            >
+                                Selecione o sexo
+                            </option>
+
+                            <option
+                                value="Masculino"
+                                <?= $doador['sexo'] == 'Masculino' ? 'selected' : '' ?>
+                            >
+                                Masculino
+                            </option>
+
+                            <option
+                                value="Feminino"
+                                <?= $doador['sexo'] == 'Feminino' ? 'selected' : '' ?>
+                            >
+                                Feminino
+                            </option>
+
+                            <option
+                                value="Outros"
+                                <?= $doador['sexo'] == 'Outros' ? 'selected' : '' ?>
+                            >
+                                Outros
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="data-nascimento">
+                            Data de Nascimento<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            name="nasc"
+                            id="data-nascimento"
+                            value="<?= htmlspecialchars($doador['nasc']) ?>"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="column">
+
+                        <label for="email">
+                            E-mail<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            value="<?= htmlspecialchars($doador['email']) ?>"
+                            placeholder="Digite o e-mail"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="cep">
+                            CEP<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="cep"
+                            id="cep"
+                            value="<?= htmlspecialchars($doador['cep']) ?>"
+                            placeholder="Digite o CEP"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="endereco">
+                            Endereço<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="endereco"
+                            id="endereco"
+                            value="<?= htmlspecialchars($doador['endereco']) ?>"
+                            placeholder="Digite o endereço"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="column">
+
+                        <label for="numero">
+                            Número<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="numero"
+                            id="numero"
+                            value="<?= htmlspecialchars($doador['numero']) ?>"
+                            placeholder="Digite o número"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="bairro">
+                            Bairro<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="bairro"
+                            id="bairro"
+                            value="<?= htmlspecialchars($doador['bairro']) ?>"
+                            placeholder="Digite o bairro"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="complemento">
+                            Complemento
+                        </label>
+
+                        <input
+                            type="text"
+                            name="complemento"
+                            id="complemento"
+                            value="<?= htmlspecialchars($doador['complemento']) ?>"
+                            placeholder="Complemento"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="column">
+
+                        <label for="telefone">
+                            Telefone<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="telefone"
+                            id="telefone"
+                            value="<?= htmlspecialchars($doador['telefone']) ?>"
+                            placeholder="Digite o telefone"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="peso">
+                            Peso<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="peso"
+                            id="peso"
+                            value="<?= htmlspecialchars($doador['peso']) ?>"
+                            placeholder="Ex: 65"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="column">
+
+                        <label for="tipo-sanguineo">
+                            Tipo Sanguíneo<span class="required">*</span>
+                        </label>
+
+                        <select
+                            name="tipo_sangue_id"
+                            id="tipo-sanguineo"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                disabled
+                            >
+                                Selecione o tipo sanguíneo
+                            </option>
+
+                            <?php foreach ($tiposSangue as $tipo): ?>
+
+                                <option
+                                    value="<?= (int) $tipo['id'] ?>"
+                                    <?= $doador['tipo_sangue_id'] == $tipo['id'] ? 'selected' : '' ?>
+                                >
+                                    <?= htmlspecialchars($tipo['tipo']) ?>
+                                </option>
+
+                            <?php endforeach; ?>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div
+                        class="column"
+                        style="width: 100%;"
+                    >
+
+                        <label for="data-doacao">
+                            Data da Doação<span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            name="datedonation"
+                            id="data-doacao"
+                            value="<?= htmlspecialchars($doador['datedonation']) ?>"
+                            required
+                            style="width: 100%;"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="column button-column">
+
+                        <button type="submit">
+                            Salvar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const cpfInput = document.getElementById('cpf');
+
+    cpfInput.addEventListener('input', function () {
+
+        this.value = this.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{3})(\d)/, '$1.$2')
+            .replace(/^(\d{3}\.\d{3})(\d)/, '$1.$2')
+            .replace(/^(\d{3}\.\d{3}\.\d{3})(\d)/, '$1-$2')
+            .substring(0, 14);
+
+    });
+
+
+    const telefoneInput =
+        document.getElementById('telefone');
+
+    telefoneInput.addEventListener('input', function () {
+
+        this.value = this.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{5})(\d{4})$/, '$1-$2')
+            .substring(0, 15);
+
+    });
+
+
+    const cepInput =
+        document.getElementById('cep');
+
+    cepInput.addEventListener('input', function () {
+
+        this.value = this.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{5})(\d{3})$/, '$1-$2')
+            .substring(0, 10);
+
+    });
+
+
+    $('#cep').on('blur', function () {
+
+        let cep = $(this).val().replace(/\D/g, '');
+
+        if (cep.length === 8) {
+
+            $.getJSON(
+                `https://viacep.com.br/ws/${cep}/json/`,
+                function (data) {
+
+                    if (!data.erro) {
+
+                        $('#endereco')
+                            .val(data.logradouro);
+
+                        $('#bairro')
+                            .val(data.bairro);
+
+                        $('#complemento')
+                            .val(data.complemento);
+
+                    } else {
+
+                        alert('CEP não encontrado.');
+
+                    }
+
+                }
+            );
+
+        } else {
+
+            alert('CEP inválido.');
+
+        }
+
+    });
+
+
+    function calcularIdade(dataNascimento) {
+
+        const hoje = new Date();
+
+        const nascimento =
+            new Date(dataNascimento);
+
+        let idade =
+            hoje.getFullYear() -
+            nascimento.getFullYear();
+
+        const m =
+            hoje.getMonth() -
+            nascimento.getMonth();
+
+        if (
+            m < 0 ||
+            (
+                m === 0 &&
+                hoje.getDate() < nascimento.getDate()
+            )
+        ) {
+
+            idade--;
+
+        }
+
+        return idade;
+    }
+
+
+    $('form').on('submit', function (e) {
+
+        const peso =
+            parseFloat($('#peso').val());
+
+        if (peso < 50) {
+
+            e.preventDefault();
+
+            alert(
+                'Peso não pode ser inferior a 50kg.'
+            );
+
+            $('#peso').focus();
+
+            return;
+        }
+
+
+        const dataNascimento =
+            $('#data-nascimento').val();
+
+        if (!dataNascimento) {
+
+            e.preventDefault();
+
+            alert(
+                'Por favor, preencha a data de nascimento.'
+            );
+
+            $('#data-nascimento').focus();
+
+            return;
+        }
+
+
+        const idade =
+            calcularIdade(dataNascimento);
+
+        if (idade < 16) {
+
+            e.preventDefault();
+
+            alert(
+                'Doadores menores de 16 anos não podem doar sangue.'
+            );
+
+            $('#data-nascimento').focus();
+
+        }
+
+    });
+
+});
+
+</script>
